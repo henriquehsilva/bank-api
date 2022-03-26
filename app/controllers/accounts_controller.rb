@@ -1,11 +1,11 @@
 class AccountsController < ApplicationController
 
-    before_action :set_account, only: [:deposit, :take_out, :transfer]
+    before_action :set_account, only: [:deposit, :take_out, :transfer, :releases]
     before_action :set_value, only: [:deposit, :take_out, :transfer]
     before_action :set_destinity_account, only: [:transfer]
 
     def deposit
-        @account.deposit(get_value)
+        @account.deposit(@value)
         if @account.save
             render json: { balance: @account.balance }
         else
